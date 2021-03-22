@@ -1,0 +1,7 @@
+<form action="." method="POST">
+    {% csrf_token %}
+    {{form}}
+    <div style="margin-bottom: 50px;">
+        <button type="submit">Update Todo</button>
+    </div>
+</form>

@@ -1,0 +1,7 @@
+<form action="." method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>create acc</button>
+</form>
+<hr>
+Already have an acc? <a href="{% url 'login' %}"><button>Login</button></a>

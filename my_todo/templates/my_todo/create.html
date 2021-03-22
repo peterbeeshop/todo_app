@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO</title>
+</head>
+<body style="background-color: darkgrey;">
+    <div 
+    style="width: 100%; height: 10%; display: flex;align-items: center; justify-content: center;border: 2px solid rgba(69, 6, 88, 0.185);
+     background-color: rgba(224, 31, 31, 0.062);">
+        <h1>TODOAPP</h1>
+        {% if user.is_authenticated %}
+          logged in as: {{request.user.username}}
+        {% endif %}
+        <a href="{% url 'logout' %}"><button>logout</button></a>
+    </div>
+    <form style="margin: 10px 0px;" action="." method="POST">
+        {% csrf_token %}
+        {{form}}
+        <div style="margin-bottom: 50px;">
+            <button style="margin-top: 10px;" type="submit">Create Todo</button>
+        </div>
+    </form>
+  
+    <h1 style="display: flex;align-items: center; justify-content: center; position: sticky; margin: 0px;">MY-TODO LIST</h1>
+        <div >
+            <ul >
+                {% for todo in todo %}
+                    <div style="border:2px solid red ; margin: 15px; background-color: rgb(109, 112, 116)">
+                        {% if todo.completed == True %}
+                        <strike><li><h2>{{todo.title}}</h2></li></strike>
+                        
+                        {% else%}
+                        <li><h2>{{todo.title}}</h2></li>
+                        
+                        {% endif %}
+                        
+                        <a href="{% url 'todo:updatetodo' todo.pk %}"><button>update todo</button></a>      
+                        <a href="{% url 'todo:deletetodo' todo.pk %}"><button>delete todo</button></a>      
+                        
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+</body>
+</html>
